@@ -57,7 +57,7 @@ class CompletionDataset(BaseDataset):
         print(mask.shape)
 
         partial[mask == 0] = 0
-        A = np.concatenate((partial, mask[:,:,0]), 2)
+        A = np.concatenate((partial, mask[:,:,0:1]), 2)
 
 
         # split AB image into A and B
