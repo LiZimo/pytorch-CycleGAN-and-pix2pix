@@ -1,6 +1,7 @@
 import glob
 import imageio
 import ntpath
+import cv2
 
 out_size = 512
 #in_dir = '/mount/Users/zli/stylegan2_data/raw_images/capture_data/'
