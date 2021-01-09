@@ -70,7 +70,7 @@ class CompletionDataset(BaseDataset):
         mean_color = torch.mean(partial[partial!=0])
         partial[mask == 0] = mean_color
         A = torch.cat((partial, mask[:,:,0:1]), axis = 2)
-        A = partial
+        #A = partial
         A = A.permute(2,0,1)
         full = full.permute(2,0,1)
         #A = Image.fromarray(A, mode = 'RGBA')
