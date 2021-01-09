@@ -48,6 +48,7 @@ class CompletionDataset(BaseDataset):
         AB_path = self.AB_paths[index]
         slack = 64
         full = torch.tensor(imageio.imread(AB_path), dtype = torch.float32)[slack:-slack,slack:-slack,:]
+        full[torch.isnan(full)] = 0.
         full = torch.clip(full, 0. ,1,)
         full = self.exr2rgb(full)
         mean_color = torch.mean(full, dim = [0,1])
@@ -57,6 +58,7 @@ class CompletionDataset(BaseDataset):
         random_mask_id = random.randint(0, len(self.mask_path) - 1)
         mask = torch.tensor(imageio.imread(self.mask_path[random_mask_id])[:,:,np.newaxis].astype(np.float32), dtype = torch.float32)[slack:-slack,slack:-slack,:]
         mask = torch.clip(mask, 0.,1.)
+        mask[torch.isnan(mask)] = 0
        # mask = mask[:,:,np.newaxis]
         mask = torch.cat((mask,mask,mask), axis = 2)
         #print(mask.min())
