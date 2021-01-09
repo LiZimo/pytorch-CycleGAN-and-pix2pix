@@ -63,7 +63,7 @@ class CompletionDataset(BaseDataset):
         #print(mask.shape)
 
         partial[mask == 0.] = 0.
-        A = torch.concatenate((partial, mask[:,:,0:1]), 2)
+        A = torch.cat((partial, mask[:,:,0:1]), 2)
         #A = Image.fromarray(A, mode = 'RGBA')
         #B = Image.fromarray(full, mode = 'RGB')
 
