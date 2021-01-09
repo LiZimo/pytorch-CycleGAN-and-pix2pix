@@ -28,7 +28,7 @@ class CompletionDataset(BaseDataset):
         self.output_nc = self.opt.input_nc if self.opt.direction == 'BtoA' else self.opt.output_nc
         #self.size = opt.load_size
         #self.size = 512
-    def exr2rgb(tensor):
+    def exr2rgb(self, tensor):
         return (tensor*12.92) * (tensor<=0.0031308).astype(np.float32) + (1.055*(np.power(tensor,(1.0/2.4)))-0.055) * (tensor>0.0031308).astype(np.float32)
 
     def __getitem__(self, index):
