@@ -80,7 +80,7 @@ def get_params(opt, size):
     return {'crop_pos': (x, y), 'flip': flip}
 
 
-def get_transform(opt, params=None, grayscale=False, method=Image.BICUBIC, convert=True, num_channels = 3):
+def get_transform(opt, params=None, grayscale=False, method=Image.NEAREST, convert=True, num_channels = 3):
     transform_list = []
     if grayscale:
         transform_list.append(transforms.Grayscale(1))
