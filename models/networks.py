@@ -537,7 +537,7 @@ class UnetSkipConnectionBlock(nn.Module):
         if self.outermost:
 
             initial_down = self.downconv(x)
-            flipped = torch.flip(initial_down,dim = [1])
+            flipped = torch.flip(initial_down, [1])
             symmetrized = (initial_down + flipped)/2
 
             return self.model_after_symm(symmetrized) 
