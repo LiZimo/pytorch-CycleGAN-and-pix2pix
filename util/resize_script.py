@@ -16,8 +16,10 @@ for imgname in all_files:
 	if os.path.exists(out_dir + '/' + ntpath.basename(imgname)):
 		print('file exists, skipping')
 		continue
-
-	img = imageio.imread(imgname)
+	try:
+		img = imageio.imread(imgname)
+	except:
+		continue
 
 	if img.shape[0] != outsize:
 		out_im = cv2.resize(img, (outsize,outsize))
