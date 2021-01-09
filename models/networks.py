@@ -500,11 +500,11 @@ class UnetSkipConnectionBlock(nn.Module):
         uprelu = nn.ReLU(True)
         upnorm = norm_layer(outer_nc)
 
-        if outermost:
+        if outermost: ## adding symmetry of features to this layer
             upconv = nn.ConvTranspose2d(inner_nc * 2, outer_nc,
                                         kernel_size=4, stride=2,
                                         padding=1)
-            down = [downconv]
+            down = [downconv + torch.flip(downconv, 1)]
             up = [uprelu, upconv, nn.Tanh()]
             model = down + [submodule] + up
         elif innermost:
