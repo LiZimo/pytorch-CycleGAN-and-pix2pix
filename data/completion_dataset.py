@@ -67,7 +67,8 @@ class CompletionDataset(BaseDataset):
         #B = AB.crop((w2, 0, w, h))
 
         # apply the same transform to both A and B
-        transform_params = get_params(self.opt, A.size)
+        #transform_params = get_params(self.opt, A.size)
+        transform_params = get_params(self.opt, A.shape[0])
         A_transform = get_transform(self.opt, transform_params, grayscale=(self.input_nc == 1))
         B_transform = get_transform(self.opt, transform_params, grayscale=(self.output_nc == 1))
 
