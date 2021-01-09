@@ -57,9 +57,9 @@ class CompletionDataset(BaseDataset):
         #mask = cv2.resize(mask, (self.size, self.size))
         mask = np.array(mask)
 
-        print(partial.shape)
-        print(full.shape)
-        print(mask.shape)
+        #print(partial.shape)
+        #print(full.shape)
+        #print(mask.shape)
 
         partial[mask == 0] = 0
         A = np.concatenate((partial, mask[:,:,0:1]), 2)
