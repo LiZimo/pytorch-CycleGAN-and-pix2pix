@@ -27,7 +27,7 @@ class CompletionDataset(BaseDataset):
         self.input_nc = self.opt.output_nc if self.opt.direction == 'BtoA' else self.opt.input_nc
         self.output_nc = self.opt.input_nc if self.opt.direction == 'BtoA' else self.opt.output_nc
         #self.size = opt.load_size
-        self.size = 256
+        #self.size = 512
 
     def __getitem__(self, index):
         """Return a data point and its metadata information.
@@ -47,7 +47,7 @@ class CompletionDataset(BaseDataset):
         partial = np.copy(full)
         random_mask_id = random.randint(0, len(self.mask_path) - 1)
         mask = imageio.imread(self.mask_path[random_mask_id])
-        mask = mask.resize((self.size,self.size))
+        #mask = cv2.resize(mask, (self.size, self.size))
         mask = np.array(mask)
 
         print(partial.shape)
