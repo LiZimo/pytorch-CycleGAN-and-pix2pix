@@ -41,7 +41,7 @@ class CompletionDataset(BaseDataset):
         AB_path = self.AB_paths[index]
         full = Image.open(AB_path).convert('RGB')
         partial = full.copy()
-        random_mask_id = random.randint(0, len(mask_path) - 1)
+        random_mask_id = random.randint(0, len(self.mask_path) - 1)
         mask = Image.open(maskPath[random_mask_id])
 
         partial[mask == 0] = 0
