@@ -17,7 +17,7 @@ for imgname in all_files:
 	else:
 		out_im = img
 
-	imageio.imwrite(out_dir + '/' ntpath.basename(imgname), out_im)
+	imageio.imwrite(out_dir + '/' + ntpath.basename(imgname), out_im)
 
 	counter += 1
 	print(counter)
