@@ -69,9 +69,9 @@ class CompletionDataset(BaseDataset):
         #partial[mask == 0] = mean_color
         #mean_color = torch.mean(partial[partial!=0])
         print(mean_color)
-        #partial[mask == 0] = mean_color
-        A = torch.cat((partial, mask[:,:,0:1]), axis = 2)
-        #A = partial
+        partial[mask == 0] = mean_color
+        #A = torch.cat((partial, mask[:,:,0:1]), axis = 2)
+        A = partial
         A = A.permute(2,0,1)
         full = full.permute(2,0,1)
         #A = Image.fromarray(A, mode = 'RGBA')
@@ -87,7 +87,7 @@ class CompletionDataset(BaseDataset):
         transform_params = get_params(self.opt, (A.shape[0], A.shape[1]))
         #print(transform_params)
         #transform_params = get_params(self.opt, (A.shape[0], A.shape[1]))
-        A_transform = get_transform(self.opt, transform_params, num_channels = 4, grayscale=(self.input_nc == 1), convert = False)
+        A_transform = get_transform(self.opt, transform_params, num_channels = 3, grayscale=(self.input_nc == 1), convert = False)
         B_transform = get_transform(self.opt, transform_params, grayscale=(self.output_nc == 1), convert = False)
 
         A = A_transform(A)
