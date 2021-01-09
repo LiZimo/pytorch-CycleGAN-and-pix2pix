@@ -52,7 +52,7 @@ class CompletionDataset(BaseDataset):
         full = torch.clip(full, 0. ,1,)
         full = self.exr2rgb(full)
         full[torch.isnan(full)] = 0.
-        full[torch.isinf(full)] = 0
+        full[torch.isinf(full)] = 0.
         mean_color = torch.mean(full, dim = [0,1])
         #mean_color_mat = torch.repeat(mean_color,512,512,1)
 
