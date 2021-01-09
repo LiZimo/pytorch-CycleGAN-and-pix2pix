@@ -46,7 +46,7 @@ class CompletionDataset(BaseDataset):
         """
         # read a image given a random integer index
         AB_path = self.AB_paths[index]
-        slack = 50
+        slack = 64
         full = torch.tensor(imageio.imread(AB_path), dtype = torch.float32)[slack:-slack,slack:-slack,:]
         full = torch.clip(full, 0. ,1,)
         full = self.exr2rgb(full)
