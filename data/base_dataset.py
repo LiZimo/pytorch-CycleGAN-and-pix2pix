@@ -110,7 +110,7 @@ def get_transform(opt, params=None, grayscale=False, method=Image.BICUBIC, conve
     if grayscale:
         transform_list += [transforms.Normalize((0.5,), (0.5,))]
     elif num_channels == 4:
-        transform_list += [transforms.Normalize((0.5, 0.5, 0.5, 0.), (0.5, 0.5, 0.5, 1.))]
+        transform_list += [transforms.Normalize((0.5, 0.5, 0.5, 0.5), (0.5, 0.5, 0.5, 0.5))]
     elif num_channels == 3:
         transform_list += [transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))]
     return transforms.Compose(transform_list)
