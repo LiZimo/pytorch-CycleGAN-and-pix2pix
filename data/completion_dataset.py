@@ -63,8 +63,8 @@ class CompletionDataset(BaseDataset):
 
         partial[mask == 0.] = 0.
         A = np.concatenate((partial, mask[:,:,0:1]), 2)
-        A = Image.fromarray(A, mode = 'RGBA')
-        B = Image.fromarray(full, mode = 'RGB')
+        #A = Image.fromarray(A, mode = 'RGBA')
+        #B = Image.fromarray(full, mode = 'RGB')
 
         # split AB image into A and B
         #w, h = AB.size
@@ -79,7 +79,7 @@ class CompletionDataset(BaseDataset):
         B_transform = get_transform(self.opt, transform_params, grayscale=(self.output_nc == 1), convert = False)
 
         A = A_transform(A)
-        B = B_transform(B)
+        B = B_transform(full)
 
         return {'A': A, 'B': B, 'A_paths': AB_path, 'B_paths': AB_path}
 
