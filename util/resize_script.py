@@ -13,7 +13,7 @@ counter = 0
 for imgname in all_files:
 	img = imageio.imread(imgname)
 
-	if img.shape[0] != out_size:
+	if img.shape[0] != outsize:
 		out_im = cv2.resize(img, (outsize,outsize))
 	else:
 		out_im = img
