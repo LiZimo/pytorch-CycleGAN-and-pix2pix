@@ -40,12 +40,12 @@ class CompletionDataset(BaseDataset):
         # read a image given a random integer index
         AB_path = self.AB_paths[index]
         full = Image.open(AB_path).convert('RGB')
-        partial = torch.clone(full)
+        partial = full.copy()
         random_mask_id = random.randint(0, len(mask_path) - 1)
         mask = Image.open(maskPath[random_mask_id])
 
         partial[mask == 0] = 0
-        A = torch.cat((partial, mask[:,:,0]), 2)
+        A = np.concatenate((partial, mask[:,:,0]), 2)
 
 
         # split AB image into A and B
