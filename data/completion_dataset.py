@@ -62,7 +62,7 @@ class CompletionDataset(BaseDataset):
         #print(full.shape)
         #print(mask.shape)
 
-        partial *= mask
+        partial = mask
         A = torch.cat((partial, mask[:,:,0:1]), 2)
         A = A.permute(2,0,1)
         full = full.permute(2,0,1)
