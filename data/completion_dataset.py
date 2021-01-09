@@ -4,6 +4,7 @@ from data.image_folder import make_dataset
 from PIL import Image
 import random
 import numpy as np
+import imageio
 
 class CompletionDataset(BaseDataset):
     """A dataset class for paired image dataset.
@@ -41,10 +42,10 @@ class CompletionDataset(BaseDataset):
         """
         # read a image given a random integer index
         AB_path = self.AB_paths[index]
-        full = np.array(Image.open(AB_path).convert('RGB'))
+        full = np.array(imageio.imread(AB_path))
         partial = np.copy(full)
         random_mask_id = random.randint(0, len(self.mask_path) - 1)
-        mask = Image.open(self.mask_path[random_mask_id])
+        mask = imageio.imread(self.mask_path[random_mask_id])
         mask = mask.resize((self.size,self.size))
         mask = np.array(mask)
 
