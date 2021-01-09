@@ -5,6 +5,7 @@ from PIL import Image
 import random
 import numpy as np
 import imageio
+import torch
 
 class CompletionDataset(BaseDataset):
     """A dataset class for paired image dataset.
