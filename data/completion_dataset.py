@@ -45,24 +45,24 @@ class CompletionDataset(BaseDataset):
         """
         # read a image given a random integer index
         AB_path = self.AB_paths[index]
-        full = np.array(imageio.imread(AB_path))
-        full = np.clip(full, 0 ,1)
+        full = torch.tensor(imageio.imread(AB_path))
+        full = torch.clip(full, 0 ,1)
         full = self.exr2rgb(full)
 
-        partial = np.copy(full)
+        partial = torch.copy(full)
         random_mask_id = random.randint(0, len(self.mask_path) - 1)
         mask = imageio.imread(self.mask_path[random_mask_id])
         mask = mask[:,:,np.newaxis]
-        mask = np.concatenate((mask,mask,mask), axis = 2)
+        mask = torch.concatenate((mask,mask,mask), axis = 2)
         #mask = cv2.resize(mask, (self.size, self.size))
-        mask = np.array(mask)
+        #mask = np.array(mask)
 
         #print(partial.shape)
         #print(full.shape)
         #print(mask.shape)
 
         partial[mask == 0.] = 0.
-        A = np.concatenate((partial, mask[:,:,0:1]), 2)
+        A = torch.concatenate((partial, mask[:,:,0:1]), 2)
         #A = Image.fromarray(A, mode = 'RGBA')
         #B = Image.fromarray(full, mode = 'RGB')
 
