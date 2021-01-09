@@ -495,6 +495,7 @@ class UnetSkipConnectionBlock(nn.Module):
             input_nc = outer_nc
         downconv = nn.Conv2d(input_nc, inner_nc, kernel_size=4,
                              stride=2, padding=1, bias=use_bias)
+        self.downconv = downconv
 
         downrelu = nn.LeakyReLU(0.2, True)
         downnorm = norm_layer(inner_nc)
@@ -535,7 +536,7 @@ class UnetSkipConnectionBlock(nn.Module):
     def forward(self, x):
         if self.outermost:
 
-            initial_down = downconv(x)
+            initial_down = self.downconv(x)
             flipped = torch.flip(initial_down,1)
             symmetrized = (initial_down + flipped)/2
 
