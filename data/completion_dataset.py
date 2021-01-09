@@ -25,6 +25,7 @@ class CompletionDataset(BaseDataset):
         assert(self.opt.load_size >= self.opt.crop_size)   # crop_size should be smaller than the size of loaded image
         self.input_nc = self.opt.output_nc if self.opt.direction == 'BtoA' else self.opt.input_nc
         self.output_nc = self.opt.input_nc if self.opt.direction == 'BtoA' else self.opt.output_nc
+        self.size = opt.load_size
 
     def __getitem__(self, index):
         """Return a data point and its metadata information.
@@ -44,6 +45,7 @@ class CompletionDataset(BaseDataset):
         partial = np.copy(full)
         random_mask_id = random.randint(0, len(self.mask_path) - 1)
         mask = Image.open(self.mask_path[random_mask_id])
+        mask = mask.resize((self.size,self.size))
         mask = np.array(mask)
 
         partial[mask == 0] = 0
