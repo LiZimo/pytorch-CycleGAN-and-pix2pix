@@ -75,7 +75,7 @@ class CompletionDataset(BaseDataset):
         # apply the same transform to both A and B
         transform_params = get_params(self.opt, A.size)
         #transform_params = get_params(self.opt, (A.shape[0], A.shape[1]))
-        A_transform = get_transform(self.opt, transform_params, grayscale=(self.input_nc == 1))
+        A_transform = get_transform(self.opt, transform_params, grayscale=(self.input_nc == 1), num_channels = 4)
         B_transform = get_transform(self.opt, transform_params, grayscale=(self.output_nc == 1))
 
         A = A_transform(A)
