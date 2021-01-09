@@ -49,7 +49,7 @@ class CompletionDataset(BaseDataset):
         full = torch.tensor(imageio.imread(AB_path), dtype = torch.float32)
         full = torch.clip(full, 0. ,1,)
         full = self.exr2rgb(full)
-        #mean_color = torch.mean(full)
+        mean_color = torch.mean(full)
 
         partial = torch.clone(full)
         random_mask_id = random.randint(0, len(self.mask_path) - 1)
@@ -67,7 +67,7 @@ class CompletionDataset(BaseDataset):
         #print(mask.shape)
 
         partial[mask == 0] = 0
-        mean_color = torch.mean(partial[partial!=0])
+        #mean_color = torch.mean(partial[partial!=0])
         partial[mask == 0] = mean_color
         A = torch.cat((partial, mask[:,:,0:1]), axis = 2)
         #A = partial
