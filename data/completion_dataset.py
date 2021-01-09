@@ -28,6 +28,8 @@ class CompletionDataset(BaseDataset):
         self.output_nc = self.opt.input_nc if self.opt.direction == 'BtoA' else self.opt.output_nc
         #self.size = opt.load_size
         #self.size = 512
+    def exr2rgb(tensor):
+        return (tensor*12.92) * (tensor<=0.0031308).astype(np.float32) + (1.055*(np.power(tensor,(1.0/2.4)))-0.055) * (tensor>0.0031308).astype(np.float32)
 
     def __getitem__(self, index):
         """Return a data point and its metadata information.
@@ -44,6 +46,9 @@ class CompletionDataset(BaseDataset):
         # read a image given a random integer index
         AB_path = self.AB_paths[index]
         full = np.array(imageio.imread(AB_path))
+        full = np.clip(full, 0 ,1)
+        full = self.exr2rgb(full)
+
         partial = np.copy(full)
         random_mask_id = random.randint(0, len(self.mask_path) - 1)
         mask = imageio.imread(self.mask_path[random_mask_id])
@@ -58,7 +63,8 @@ class CompletionDataset(BaseDataset):
 
         partial[mask == 0] = 0
         A = np.concatenate((partial, mask[:,:,0:1]), 2)
-
+        A = Image.fromarray(A)
+        B = Image.fromarray(full)
 
         # split AB image into A and B
         #w, h = AB.size
@@ -67,13 +73,13 @@ class CompletionDataset(BaseDataset):
         #B = AB.crop((w2, 0, w, h))
 
         # apply the same transform to both A and B
-        #transform_params = get_params(self.opt, A.size)
-        transform_params = get_params(self.opt, (A.shape[0], A.shape[1]))
+        transform_params = get_params(self.opt, A.size)
+        #transform_params = get_params(self.opt, (A.shape[0], A.shape[1]))
         A_transform = get_transform(self.opt, transform_params, grayscale=(self.input_nc == 1))
         B_transform = get_transform(self.opt, transform_params, grayscale=(self.output_nc == 1))
 
         A = A_transform(A)
-        B = B_transform(full)
+        B = B_transform(B)
 
         return {'A': A, 'B': B, 'A_paths': AB_path, 'B_paths': AB_path}
 
