@@ -48,6 +48,10 @@ class CompletionDataset(BaseDataset):
         mask = mask.resize((self.size,self.size))
         mask = np.array(mask)
 
+        print(partial.shape)
+        print(full.shape)
+        print(mask.shape)
+
         partial[mask == 0] = 0
         A = np.concatenate((partial, mask[:,:,0]), 2)
 
