@@ -63,7 +63,7 @@ class CompletionDataset(BaseDataset):
 
         partial[mask == 0] = 0
         A = np.concatenate((partial, mask[:,:,0:1]), 2)
-        A = Image.fromarray(A)
+        A = Image.fromarray(A, model = 'RGBA')
         B = Image.fromarray(full)
 
         # split AB image into A and B
