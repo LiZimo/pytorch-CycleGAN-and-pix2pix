@@ -42,7 +42,7 @@ class CompletionDataset(BaseDataset):
         full = Image.open(AB_path).convert('RGB')
         partial = full.copy()
         random_mask_id = random.randint(0, len(self.mask_path) - 1)
-        mask = Image.open(maskPath[random_mask_id])
+        mask = Image.open(self.mask_path[random_mask_id])
 
         partial[mask == 0] = 0
         A = np.concatenate((partial, mask[:,:,0]), 2)
