@@ -3,6 +3,7 @@ from data.base_dataset import BaseDataset, get_params, get_transform
 from data.image_folder import make_dataset
 from PIL import Image
 import random
+import numpy as np
 
 class CompletionDataset(BaseDataset):
     """A dataset class for paired image dataset.
@@ -39,10 +40,11 @@ class CompletionDataset(BaseDataset):
         """
         # read a image given a random integer index
         AB_path = self.AB_paths[index]
-        full = Image.open(AB_path).convert('RGB')
-        partial = full.copy()
+        full = np.array(Image.open(AB_path).convert('RGB'))
+        partial = np.copy(full)
         random_mask_id = random.randint(0, len(self.mask_path) - 1)
         mask = Image.open(self.mask_path[random_mask_id])
+        mask = np.array(mask)
 
         partial[mask == 0] = 0
         A = np.concatenate((partial, mask[:,:,0]), 2)
