@@ -68,6 +68,7 @@ class CompletionDataset(BaseDataset):
 
         partial[mask == 0] = 0
         #mean_color = torch.mean(partial[partial!=0])
+        print(mean_color)
         partial[mask == 0] = mean_color
         A = torch.cat((partial, mask[:,:,0:1]), axis = 2)
         #A = partial
