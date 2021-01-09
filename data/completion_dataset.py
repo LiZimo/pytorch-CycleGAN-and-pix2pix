@@ -83,7 +83,7 @@ class CompletionDataset(BaseDataset):
         transform_params = get_params(self.opt, (A.shape[0], A.shape[1]))
         #print(transform_params)
         #transform_params = get_params(self.opt, (A.shape[0], A.shape[1]))
-        A_transform = get_transform(self.opt, transform_params, num_channels = A.size()[2], grayscale=(self.input_nc == 1), convert = False)
+        A_transform = get_transform(self.opt, transform_params, num_channels = 4, grayscale=(self.input_nc == 1), convert = False)
         B_transform = get_transform(self.opt, transform_params, grayscale=(self.output_nc == 1), convert = False)
 
         A = A_transform(A)
