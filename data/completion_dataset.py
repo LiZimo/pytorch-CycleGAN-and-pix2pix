@@ -50,7 +50,7 @@ class CompletionDataset(BaseDataset):
         full = torch.clip(full, 0 ,1)
         full = self.exr2rgb(full)
 
-        partial = torch.copy(full)
+        partial = torch.clone(full)
         random_mask_id = random.randint(0, len(self.mask_path) - 1)
         mask = imageio.imread(self.mask_path[random_mask_id])
         mask = mask[:,:,np.newaxis]
