@@ -63,7 +63,7 @@ class CompletionDataset(BaseDataset):
         #print(mask.shape)
 
         #partial = mask
-        A = torch.cat((partial, partial[:,:,0:1]), 2)
+        #A = torch.cat((partial, partial[:,:,0:1]), 2)
         A = A.permute(2,0,1)
         full = full.permute(2,0,1)
         #A = Image.fromarray(A, mode = 'RGBA')
@@ -79,7 +79,7 @@ class CompletionDataset(BaseDataset):
         transform_params = get_params(self.opt, (A.shape[0], A.shape[1]))
         #print(transform_params)
         #transform_params = get_params(self.opt, (A.shape[0], A.shape[1]))
-        A_transform = get_transform(self.opt, transform_params, grayscale=(self.input_nc == 1), num_channels = 4, convert = False)
+        A_transform = get_transform(self.opt, transform_params, grayscale=(self.input_nc == 1), convert = False)
         B_transform = get_transform(self.opt, transform_params, grayscale=(self.output_nc == 1), convert = False)
 
         A = A_transform(A)
