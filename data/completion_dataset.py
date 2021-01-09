@@ -54,7 +54,7 @@ class CompletionDataset(BaseDataset):
         random_mask_id = random.randint(0, len(self.mask_path) - 1)
         mask = imageio.imread(self.mask_path[random_mask_id])
         mask = mask[:,:,np.newaxis]
-        mask = torch.concatenate((mask,mask,mask), axis = 2)
+        mask = torch.cat((mask,mask,mask), axis = 2)
         #mask = cv2.resize(mask, (self.size, self.size))
         #mask = np.array(mask)
 
