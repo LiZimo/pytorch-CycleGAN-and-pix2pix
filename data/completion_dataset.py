@@ -66,10 +66,10 @@ class CompletionDataset(BaseDataset):
         #print(full.shape)
         #print(mask.shape)
 
-        partial[mask == 0] = 0
+        partial[mask == 0] = mean_color
         #mean_color = torch.mean(partial[partial!=0])
         print(mean_color)
-        partial[mask == 0] = mean_color
+        #partial[mask == 0] = mean_color
         A = torch.cat((partial, mask[:,:,0:1]), axis = 2)
         #A = partial
         A = A.permute(2,0,1)
