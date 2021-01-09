@@ -495,6 +495,7 @@ class UnetSkipConnectionBlock(nn.Module):
             input_nc = outer_nc
         downconv = nn.Conv2d(input_nc, inner_nc, kernel_size=4,
                              stride=2, padding=1, bias=use_bias)
+
         downrelu = nn.LeakyReLU(0.2, True)
         downnorm = norm_layer(inner_nc)
         uprelu = nn.ReLU(True)
@@ -504,9 +505,12 @@ class UnetSkipConnectionBlock(nn.Module):
             upconv = nn.ConvTranspose2d(inner_nc * 2, outer_nc,
                                         kernel_size=4, stride=2,
                                         padding=1)
-            down = [downconv + torch.flip(downconv, 1)]
+            down = [downconv]
+
             up = [uprelu, upconv, nn.Tanh()]
             model = down + [submodule] + up
+            model_after_symm = [submodule] + up
+            self.model_after_symm = nn.Sequential(*model_after_symm)
         elif innermost:
             upconv = nn.ConvTranspose2d(inner_nc, outer_nc,
                                         kernel_size=4, stride=2,
@@ -530,7 +534,15 @@ class UnetSkipConnectionBlock(nn.Module):
 
     def forward(self, x):
         if self.outermost:
-            return self.model(x)
+
+            initial_down = downconv(x)
+            flipped = torch.flip(initial_down,1)
+            symmetrized = (initial_down + flipped)/2
+
+            return self.model_after_symm(symmetrized) 
+
+
+            #return self.model(x)
         else:   # add skip connections
             return torch.cat([x, self.model(x)], 1)
 
