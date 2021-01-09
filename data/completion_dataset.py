@@ -53,10 +53,11 @@ class CompletionDataset(BaseDataset):
         partial = torch.clone(full)
         random_mask_id = random.randint(0, len(self.mask_path) - 1)
         mask = torch.tensor(imageio.imread(self.mask_path[random_mask_id])[:,:,np.newaxis].astype(np.float32), dtype = torch.float32)
+        mask = torch.clip(mask, 0.,1.)
        # mask = mask[:,:,np.newaxis]
         mask = torch.cat((mask,mask,mask), axis = 2)
-        print(mask.min())
-        print(mask.max())
+        #print(mask.min())
+        #print(mask.max())
         #mask = cv2.resize(mask, (self.size, self.size))
         #mask = np.array(mask)
 
