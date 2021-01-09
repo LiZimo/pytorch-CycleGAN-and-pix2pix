@@ -64,6 +64,8 @@ class CompletionDataset(BaseDataset):
 
         partial[mask == 0.] = 0.
         A = torch.cat((partial, mask[:,:,0:1]), 2)
+        A = A.permute(2,0,1)
+        full = full.permute(2,0,1)
         #A = Image.fromarray(A, mode = 'RGBA')
         #B = Image.fromarray(full, mode = 'RGB')
 
