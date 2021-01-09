@@ -30,7 +30,7 @@ class CompletionDataset(BaseDataset):
         #self.size = opt.load_size
         #self.size = 512
     def exr2rgb(self, tensor):
-        return (tensor*12.92) * (tensor<=0.0031308).astype(np.float32) + (1.055*(np.power(tensor,(1.0/2.4)))-0.055) * (tensor>0.0031308).astype(np.float32)
+        return (tensor*12.92) * (tensor<=0.0031308) + (1.055*(torch.pow(tensor,(1.0/2.4)))-0.055) * (tensor>0.0031308)
 
     def __getitem__(self, index):
         """Return a data point and its metadata information.
