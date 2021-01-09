@@ -49,6 +49,7 @@ class CompletionDataset(BaseDataset):
         full = torch.tensor(imageio.imread(AB_path), dtype = torch.float32)
         full = torch.clip(full, 0. ,1,)
         full = self.exr2rgb(full)
+        #mean_color = torch.mean(full)
 
         partial = torch.clone(full)
         random_mask_id = random.randint(0, len(self.mask_path) - 1)
@@ -66,7 +67,9 @@ class CompletionDataset(BaseDataset):
         #print(mask.shape)
 
         partial[mask == 0] = 0
-        #A = torch.cat((partial, mask[:,:,0:1]), axis = 2)
+        mean_color = torch.mean(partial[partial!=0])
+        partial[mask == 0] = mean_color
+        A = torch.cat((partial, mask[:,:,0:1]), axis = 2)
         A = partial
         A = A.permute(2,0,1)
         full = full.permute(2,0,1)
@@ -83,7 +86,7 @@ class CompletionDataset(BaseDataset):
         transform_params = get_params(self.opt, (A.shape[0], A.shape[1]))
         #print(transform_params)
         #transform_params = get_params(self.opt, (A.shape[0], A.shape[1]))
-        A_transform = get_transform(self.opt, transform_params, num_channels = 3, grayscale=(self.input_nc == 1), convert = False)
+        A_transform = get_transform(self.opt, transform_params, num_channels = 4, grayscale=(self.input_nc == 1), convert = False)
         B_transform = get_transform(self.opt, transform_params, grayscale=(self.output_nc == 1), convert = False)
 
         A = A_transform(A)
