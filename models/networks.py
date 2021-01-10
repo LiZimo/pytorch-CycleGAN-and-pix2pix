@@ -539,8 +539,8 @@ class UnetSkipConnectionBlock(nn.Module):
             initial_down = self.downconv(x)
             flipped = torch.flip(initial_down, [1])
             symmetrized = (initial_down + flipped)/2
-
-            return self.model_after_symm(symmetrized) + x[:,0:3,:,:] ## making resnet in the last connection
+            
+            return self.model_after_symm(symmetrized) + torch.clone(x)[:,0:3,:,:] ## making resnet in the last connection
 
 
             #return self.model(x)
