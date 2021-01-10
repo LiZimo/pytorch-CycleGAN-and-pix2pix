@@ -540,7 +540,7 @@ class UnetSkipConnectionBlock(nn.Module):
             flipped = torch.flip(initial_down, [1])
             symmetrized = (initial_down + flipped)/2
 
-            return self.model_after_symm(symmetrized) 
+            return self.model_after_symm(symmetrized) + x ## making resnet in the last connection
 
 
             #return self.model(x)
