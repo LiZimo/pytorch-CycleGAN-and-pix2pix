@@ -82,7 +82,7 @@ class CompletionDataset(BaseDataset):
         
 
         elif self.opt.phase == 'test':
-            mask = torch.array(partial == 0)
+            mask = torch.tensor(partial == 0)
 
         partial[mask == 0] = 0
         A = torch.cat((partial, mask[:,:,0:1]), axis = 2)
