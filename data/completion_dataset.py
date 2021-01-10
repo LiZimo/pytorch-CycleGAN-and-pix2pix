@@ -48,6 +48,9 @@ class CompletionDataset(BaseDataset):
         AB_path = self.AB_paths[index]
         slack = 64
         full = torch.tensor(imageio.imread(AB_path), dtype = torch.float32)[slack:-slack,slack:-slack,:]
+
+        if self.opt.phase == 'test':
+            full = full/255.
         
         full = torch.clip(full, 0. ,1,)
         full = self.exr2rgb(full)
@@ -57,12 +60,13 @@ class CompletionDataset(BaseDataset):
         #mean_color_mat = torch.repeat(mean_color,512,512,1)
 
         partial = torch.clone(full)
-        random_mask_id = random.randint(0, len(self.mask_path) - 1)
-        mask = torch.tensor(imageio.imread(self.mask_path[random_mask_id])[:,:,np.newaxis].astype(np.float32), dtype = torch.float32)[slack:-slack,slack:-slack,:]
-        mask = torch.clip(mask, 0.,1.)
-        mask[torch.isnan(mask)] = 0
-       # mask = mask[:,:,np.newaxis]
-        mask = torch.cat((mask,mask,mask), axis = 2)
+
+        if self.opt.phase == 'train':
+            random_mask_id = random.randint(0, len(self.mask_path) - 1)
+            mask = torch.tensor(imageio.imread(self.mask_path[random_mask_id])[:,:,np.newaxis].astype(np.float32), dtype = torch.float32)[slack:-slack,slack:-slack,:]
+            mask = torch.clip(mask, 0.,1.)
+            mask[torch.isnan(mask)] = 0
+            mask = torch.cat((mask,mask,mask), axis = 2)
         #print(mask.min())
         #print(mask.max())
         #mask = cv2.resize(mask, (self.size, self.size))
@@ -75,6 +79,11 @@ class CompletionDataset(BaseDataset):
         #partial[mask == 0] = mean_color
         #mean_color = torch.mean(partial[partial!=0])
         #print(mean_color)
+        
+
+        elif self.opt.phase == 'test':
+            mask = torch.array(partial == 0)
+
         partial[mask == 0] = 0
         A = torch.cat((partial, mask[:,:,0:1]), axis = 2)
         #A = partial
