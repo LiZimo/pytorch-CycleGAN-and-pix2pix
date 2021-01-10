@@ -53,7 +53,8 @@ class CompletionDataset(BaseDataset):
             full = full/255.
         
         full = torch.clip(full, 0. ,1,)
-        full = self.exr2rgb(full)
+        if self.opt.phase == 'train':
+            full = self.exr2rgb(full)
         full[torch.isnan(full)] = 0.
         full[torch.isinf(full)] = 0.
         mean_color = torch.mean(full, dim = [0,1])
@@ -82,7 +83,7 @@ class CompletionDataset(BaseDataset):
         
 
         elif self.opt.phase == 'test':
-            mask = torch.tensor(partial == 0)
+            mask = torch.tensor(partial != 0)
 
         partial[mask == 0] = 0
         A = torch.cat((partial, mask[:,:,0:1]), axis = 2)
