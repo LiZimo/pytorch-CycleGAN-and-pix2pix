@@ -65,7 +65,6 @@ class CompletionDataset(BaseDataset):
         if self.opt.phase == 'train':
             random_mask_id = random.randint(0, len(self.mask_path) - 1)
             mask = torch.tensor(imageio.imread(self.mask_path[random_mask_id])[:,:,np.newaxis].astype(np.float32), dtype = torch.float32)[slack:-slack,slack:-slack,:]
-            mask = torch.clip(mask, 0.,1.)
             mask[torch.isnan(mask)] = 0
             mask = torch.cat((mask,mask,mask), axis = 2)
         #print(mask.min())
@@ -85,6 +84,7 @@ class CompletionDataset(BaseDataset):
         elif self.opt.phase == 'test':
             mask = torch.tensor(partial != 0)
 
+        mask = torch.clip(mask, 0.,1.)
         partial[mask == 0] = 0
         A = torch.cat((partial, mask[:,:,0:1]), axis = 2)
         #A = partial
