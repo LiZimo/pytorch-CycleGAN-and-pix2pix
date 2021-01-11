@@ -21,10 +21,7 @@ for imgname in network_outputs:
 	empty_im[slack:-slack,slack:-slack,:] = network_img
 
 	input_img[input_img == 0] = empty_im[input_img == 0]
-	empty_im = np.zeros((512,512,3))
-	resized = cv2.resize(input_img, (384,384), interpolation=cv2.INTER_NEAREST)
-	empty_im[slack:-slack,slack:-slack,:] = resized
-	out_im = empty_im.astype(np.uint8)
+	out_im = input_img.astype(np.uint8)
 
 	out_name = os.path.join(output_dir, basename)
 	imageio.imwrite(out_name, out_im)
