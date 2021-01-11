@@ -6,7 +6,7 @@ import ntpath
 import numpy as np
 
 input_dir = '/mount/Users/zli/pix2pix_data/completion_pix2pix_instance/test_latest/images'
-original_dir = 'mount/Users/zli/stylegan2_data/raw_images/capture_data/test'
+original_dir = '/mount/Users/zli/stylegan2_data/raw_images/capture_data/test'
 output_dir = '/mount/Users/zli/pix2pix_data/completion_pix2pix_instance/test_latest/post_process'
 
 network_outputs = glob.glob(input_dir + '/*fake_B.png')
