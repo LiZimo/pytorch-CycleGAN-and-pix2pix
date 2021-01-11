@@ -15,6 +15,7 @@ counter = 0
 for imgname in network_outputs:
 	basename = ntpath.basename(imgname).replace('_fake_B','')
 	input_img = imageio.imread(os.path.join(original_dir, basename))
+	input_img = input_img[:,:,0:3]
 	network_img = imageio.imread(imgname)
 	network_img = cv2.resize(network_img, (384,384), interpolation=cv2.INTER_NEAREST)
 	empty_im = np.zeros((512,512,3))
