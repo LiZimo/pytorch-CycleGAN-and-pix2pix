@@ -23,6 +23,8 @@ for imgname in network_outputs:
 
 	input_img[input_img == 0] = empty_im[input_img == 0]
 	template = imageio.imread(template)
+	print(input_img.shape)
+	print(template.shape)
 	input_img[template == 0] = 0
 	out_im = input_img.astype(np.uint8)
 
