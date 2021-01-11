@@ -11,7 +11,7 @@ output_dir = '/mount/Users/zli/pix2pix_data/completion_pix2pix_instance/test_lat
 template = 'template_celebA_mask.png'
 
 network_outputs = glob.glob(input_dir + '/*fake_B.png')
-
+counter = 0
 for imgname in network_outputs:
 	basename = ntpath.basename(imgname).replace('_fake_B','')
 	input_img = imageio.imread(os.path.join(original_dir, basename))
@@ -28,3 +28,6 @@ for imgname in network_outputs:
 
 	out_name = os.path.join(output_dir, basename)
 	imageio.imwrite(out_name, out_im)
+
+	print(counter)
+	counter+=1
