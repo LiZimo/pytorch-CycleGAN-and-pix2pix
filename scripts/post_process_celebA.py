@@ -8,7 +8,9 @@ import numpy as np
 input_dir = '/mount/Users/zli/pix2pix_data/completion_pix2pix_instance/test_latest/images'
 original_dir = '/mount/Users/zli/stylegan2_data/raw_images/capture_data/test'
 output_dir = '/mount/Users/zli/pix2pix_data/completion_pix2pix_instance/test_latest/post_process'
-template = 'template_celebA_mask.png'
+template_name = 'template_celebA_mask.png'
+template = imageio.imread(template_name)
+template = template[:,:,0:3]
 
 network_outputs = glob.glob(input_dir + '/*fake_B.png')
 counter = 0
@@ -23,8 +25,7 @@ for imgname in network_outputs:
 	empty_im[slack:-slack,slack:-slack,:] = network_img
 
 	input_img[input_img == 0] = empty_im[input_img == 0]
-	template = imageio.imread(template)
-	template = template[:,:,0:3]
+	
 	print(input_img.shape)
 	print(template.shape)
 	input_img[template == 0] = 0
