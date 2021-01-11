@@ -23,7 +23,8 @@ for imgname in network_outputs:
 	empty_im[slack:-slack,slack:-slack,:] = network_img
 
 	input_img[input_img == 0] = empty_im[input_img == 0]
-	template = imageio.imread(template)[:,:,0:3]
+	template = imageio.imread(template)
+	template = template[:,:,0:3]
 	print(input_img.shape)
 	print(template.shape)
 	input_img[template == 0] = 0
