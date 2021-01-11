@@ -3,6 +3,7 @@ import imageio
 import cv2
 import os
 import ntpath
+import numpy as np
 
 input_dir = '/mount/Users/zli/pix2pix_data/completion_pix2pix_instance/test_latest/images'
 output_dir = '/mount/Users/zli/pix2pix_data/completion_pix2pix_instance/test_latest/post_process'
