@@ -21,4 +21,4 @@ for imgname in network_outputs:
 	empty_im[slack:-slack,slack:-slack,:] = resized
 
 	out_name = os.path.join(output_dir, ntpath.basename(imgname).replace('_fake_B',''))
-	imageio.imwrite(empty_im, out_name)
+	imageio.imwrite(out_name, empty_im)
