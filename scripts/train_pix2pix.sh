@@ -10,3 +10,5 @@ python train.py --dataroot /mount/Users/zli/stylegan2_data/raw_images/capture_da
 python test.py --dataroot /mount/Users/zli/stylegan2_data/raw_images/capture_data/ --name completion_pix2pix --model pix2pix --netG unet_256 --direction AtoB --dataset_mode completion --norm batch
 
 python test.py --dataroot /mount/Users/zli/stylegan2_data/raw_images/capture_data/ --name completion_pix2pix_instance --model pix2pix --netG unet_256 --direction AtoB --dataset_mode completion --norm instance
+
+python test.py --dataroot /mount/Users/zli/stylegan2_data/raw_images/reduced_uv_maps/ --name completion_pix2pix_instance --model pix2pix --netG unet_256 --direction AtoB --dataset_mode completion --norm instance
