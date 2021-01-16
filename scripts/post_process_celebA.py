@@ -6,7 +6,8 @@ import ntpath
 import numpy as np
 
 input_dir = '/mount/Users/zli/pix2pix_data/completion_pix2pix_instance/test_latest/images'
-original_dir = '/mount/Users/zli/stylegan2_data/raw_images/capture_data/test'
+#original_dir = '/mount/Users/zli/stylegan2_data/raw_images/capture_data/test'
+original_dir = '/mount/Users/zli/stylegan2_data/raw_images/reduced_uv_maps/test'
 output_dir = '/mount/Users/zli/pix2pix_data/completion_pix2pix_instance/test_latest/post_process'
 template_name = 'template_celebA_mask.png'
 template = imageio.imread(template_name)
