@@ -26,6 +26,7 @@ for imgname in network_outputs:
 	empty_im[slack:-slack,slack:-slack,:] = network_img
 
 	input_img[input_img == 0] = empty_im[input_img == 0]
+	input_img[empty_im==0] = 0
 	
 	print(input_img.shape)
 	print(template.shape)
