@@ -31,7 +31,7 @@ for imgname in network_outputs:
 	input_img[template == 0] = 0
 	empty_im[template == 0] = 0
 	#out_im = input_img.astype(np.uint8)
-	out_im = input_im.astype(np.uint8)
+	out_im = input_img.astype(np.uint8)
 
 	out_name = os.path.join(output_dir, basename)
 	imageio.imwrite(out_name, out_im)
