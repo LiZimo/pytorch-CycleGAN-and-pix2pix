@@ -9,7 +9,7 @@ input_dir = '/mount/Users/zli/pix2pix_data/completion_pix2pix_instance/test_late
 #original_dir = '/mount/Users/zli/stylegan2_data/raw_images/capture_data/test'
 original_dir = '/mount/Users/zli/stylegan2_data/raw_images/reduced_uv_maps/test'
 output_dir = '/mount/Users/zli/pix2pix_data/completion_pix2pix_instance/test_latest/post_process'
-template_name = 'template_celebA_mask.png'
+template_name = 'template_celebA_mask_slim.png'
 template = imageio.imread(template_name)
 template = template[:,:,0:3]
 
@@ -26,7 +26,7 @@ for imgname in network_outputs:
 	empty_im[slack:-slack,slack:-slack,:] = network_img
 
 	input_img[input_img == 0] = empty_im[input_img == 0]
-	input_img[empty_im==0] = 0
+	#input_img[empty_im==0] = 0
 	
 	print(input_img.shape)
 	print(template.shape)
