@@ -24,6 +24,7 @@ for imgname in network_outputs:
 	empty_im = np.zeros((512,512,3))
 	slack = 64
 	empty_im[slack:-slack,slack:-slack,:] = network_img
+	empty_im[template == 0] = 0
 
 	input_img[input_img == 0] = empty_im[input_img == 0]
 	#input_img[empty_im==0] = 0
