@@ -30,7 +30,7 @@ for imgname in network_outputs:
 	
 	print(input_img.shape)
 	print(template.shape)
-	input_img[template == 0] = 0
+	#input_img[template == 0] = 0
 	#empty_im[template == 0] = 0
 	#out_im = input_img.astype(np.uint8)
 	out_im = input_img.astype(np.uint8)
