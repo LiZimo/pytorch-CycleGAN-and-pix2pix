@@ -27,7 +27,7 @@ counter = 0
 for imgname in CFD_images:
 	basename = ntpath.basename(imgname)
 	if basename.replace('output_uv.png', '.jpg') not in valid_list:
-		continue:
+		continue
 
 	input_img = imageio.imread(imgname)
 	input_img = cv2.resize(input_img, (512,512))
