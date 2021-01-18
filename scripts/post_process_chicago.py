@@ -37,7 +37,7 @@ for imgname in CFD_images:
 	input_img[template == 0] = 0
 
 
-	out_name = os.path.join(output_dir, basename.replace('_output_uv.png', 'output_uv_nobackground.png'))
+	out_name = os.path.join(output_dir, basename.replace('_output_uv.png', '_output_uv_nobackground.png'))
 	imageio.imwrite(out_name, input_img)
 
 	print(counter)
