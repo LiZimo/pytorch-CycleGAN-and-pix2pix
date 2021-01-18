@@ -26,7 +26,9 @@ CFD_images = glob.glob(input_dir + '/*output_uv.png')
 counter = 0
 for imgname in CFD_images:
 	basename = ntpath.basename(imgname)
-	if basename.replace('output_uv.png', '.jpg') not in valid_list:
+	im_id =basename.replace('output_uv.png', '.jpg')
+	print(im_id)
+	if im_id not in valid_list:
 		continue
 
 	input_img = imageio.imread(imgname)
