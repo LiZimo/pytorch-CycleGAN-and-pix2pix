@@ -12,7 +12,7 @@ output_dir = '/mount/Users/zli/stylegan2_data/raw_images/CFD_masked'
 #original_dir = '/mount/Users/zli/stylegan2_data/raw_images/reduced_uv_maps/test'
 #output_dir = '/mount/Users/zli/pix2pix_data/completion_pix2pix_instance/test_latest/post_process'
 template_name = 'template_celebA_mask.png'
-valid_list_fname = '/mount/Users/yajie/zimo_Siggraph/CFD/CFD_validlist'
+valid_list_fname = '/mount/Users/yajie/zimo_Siggraph/CFD/CFD_validlist.txt'
 valid_list = open(valid_list_fname).read()
 valid_list = valid_list.split('\n')
 
