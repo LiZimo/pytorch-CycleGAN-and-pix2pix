@@ -11,8 +11,11 @@ output_dir = '/mount/Users/zli/stylegan2_data/raw_images/CFD_masked'
 #original_dir = '/mount/Users/zli/stylegan2_data/raw_images/reduced_uv_maps/test'
 #output_dir = '/mount/Users/zli/pix2pix_data/completion_pix2pix_instance/test_latest/post_process'
 template_name = 'template_celebA_mask.png'
-template = imageio.imread(template_name)
-template = template[:,:,0:3]
+#template = imageio.imread(template_name)
+#template = template[:,:,0:3]
+
+template = np.array(Image.open(template_name).convert('1')).astype(np.float32)
+#celebA_mask = np.clip(celebA_mask, 0., 1.)
 
 CFD_images = glob.glob(input_dir + '/*output_uv.png')
 counter = 0
