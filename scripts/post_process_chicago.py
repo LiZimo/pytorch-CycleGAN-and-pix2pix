@@ -4,6 +4,7 @@ import cv2
 import os
 import ntpath
 import numpy as np
+from PIL import Image
 
 input_dir = '/mount/Users/yajie/zimo_Siggraph/CFD/CFD'
 output_dir = '/mount/Users/zli/stylegan2_data/raw_images/CFD_masked'
