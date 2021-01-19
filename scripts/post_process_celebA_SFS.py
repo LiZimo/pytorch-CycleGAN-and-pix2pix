@@ -33,7 +33,7 @@ for imgname in images:
 	input_img = cv2.resize(input_img, (512,512))
 	input_img = input_img[:,:,0:3]
 	input_hair_mask = np.array(Image.open(hair_mask_dir + '/' + basename).convert('1')).astype(np.float32)
-	reverse_hair_mask = 1. = input_hair_mask
+	reverse_hair_mask = 1. - input_hair_mask
 	input_img[template == 0] = 0
 	input_img[reverse_hair_mask == 0] = 0
 
