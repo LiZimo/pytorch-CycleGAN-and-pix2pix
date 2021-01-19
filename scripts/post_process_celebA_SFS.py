@@ -8,6 +8,7 @@ from PIL import Image
 
 input_dir = '/mount/Users/yajie/zimo_Siggraph/celeba-1024_neutral_results'
 output_dir = '/mount/Users/zli/stylegan2_data/raw_images/celebA_highqual_masked'
+output_reverse_hair_dir = '/mount/Users/zli/stylegan2_data/raw_images/hair_masks_reverse'
 #original_dir = '/mount/Users/zli/stylegan2_data/raw_images/capture_data/test'
 #original_dir = '/mount/Users/zli/stylegan2_data/raw_images/reduced_uv_maps/test'
 #output_dir = '/mount/Users/zli/pix2pix_data/completion_pix2pix_instance/test_latest/post_process'
@@ -31,14 +32,16 @@ for imgname in images:
 	input_img = imageio.imread(imgname)
 	input_img = cv2.resize(input_img, (512,512))
 	input_img = input_img[:,:,0:3]
-	input_hair_mask = imagio.imread(os.path.join(hair_mask_dir, basename))
+	input_hair_mask = np.array(Image.open(hair_mask_dir + '/' basename).convert('1')).astype(np.float32)
+	reverse_hair_mask = 1. = input_hair_mask
 	input_img[template == 0] = 0
-	input_img[input_hyair_mask == 0] = 0
+	input_img[reverse_hair_mask == 0] = 0
 
 
 
 	out_name = os.path.join(output_dir, basename.replace('_output_uv.png', '_output_uv_nobackground.png'))
 	imageio.imwrite(out_name, input_img)
+	imageio.imwrite(output_reverse_hair_dir + '/' out_name, reverse_hair_mask)
 
 	print(counter)
 	counter+=1
