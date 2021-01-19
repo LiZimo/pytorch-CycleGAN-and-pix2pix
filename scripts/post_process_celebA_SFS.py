@@ -6,11 +6,12 @@ import ntpath
 import numpy as np
 from PIL import Image
 
-input_dir = '/mount/Users/yajie/zimo_Siggraph/CFD/CFD'
-output_dir = '/mount/Users/zli/stylegan2_data/raw_images/CFD_masked'
+input_dir = '/mount/Users/yajie/zimo_Siggraph/celeba-1024_neutral_results'
+output_dir = '/mount/Users/zli/stylegan2_data/raw_images/celebA_highqual_masked'
 #original_dir = '/mount/Users/zli/stylegan2_data/raw_images/capture_data/test'
 #original_dir = '/mount/Users/zli/stylegan2_data/raw_images/reduced_uv_maps/test'
 #output_dir = '/mount/Users/zli/pix2pix_data/completion_pix2pix_instance/test_latest/post_process'
+hair_mask_dir = '/mount/Users/zli/stylegan2_data/raw_images/hair_masks'
 template_name = 'template_celebA_mask.png'
 valid_list_fname = '/mount/Users/yajie/zimo_Siggraph/CFD/CFD_validlist.txt'
 valid_list = open(valid_list_fname).read()
@@ -22,19 +23,18 @@ valid_list = valid_list.split('\n')
 template = np.array(Image.open(template_name).convert('1')).astype(np.float32)
 #celebA_mask = np.clip(celebA_mask, 0., 1.)
 
-CFD_images = glob.glob(input_dir + '/*output_uv.png')
+images = glob.glob(input_dir + '/*output_uv.png')
 counter = 0
-for imgname in CFD_images:
+for imgname in images:
 	basename = ntpath.basename(imgname)
-	im_id =basename.replace('_output_uv.png', '.jpg')
-	print(im_id)
-	if im_id not in valid_list:
-		continue
 
 	input_img = imageio.imread(imgname)
 	input_img = cv2.resize(input_img, (512,512))
 	input_img = input_img[:,:,0:3]
+	input_hair_mask = imagio.imread(os.path.join(hair_mask_dir, basename))
 	input_img[template == 0] = 0
+	input_img[input_hyair_mask == 0] = 0
+
 
 
 	out_name = os.path.join(output_dir, basename.replace('_output_uv.png', '_output_uv_nobackground.png'))
