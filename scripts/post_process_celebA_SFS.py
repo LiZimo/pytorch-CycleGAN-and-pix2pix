@@ -41,7 +41,7 @@ for imgname in images:
 
 	hair_mask_name = hair_mask_dir + '/' + basename
 	if os.path.exists(hair_mask_name):
-		input_hair_mask = np.array(Image.open().convert('1')).astype(np.float32)
+		input_hair_mask = np.array(Image.open(hair_mask_name).convert('1')).astype(np.float32)
 	else:
 		input_hair_mask = np.ones(template.shape)
 	reverse_hair_mask = 1. - input_hair_mask
