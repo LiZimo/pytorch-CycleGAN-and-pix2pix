@@ -41,7 +41,8 @@ for imgname in images:
 
 	out_name = os.path.join(output_dir, basename.replace('_output_uv.png', '_output_uv_nobackground.png'))
 	imageio.imwrite(out_name, input_img)
-	imageio.imwrite(output_reverse_hair_dir + '/' + basename, reverse_hair_mask.astype(np.uint8))
+	imageio.imwrite(output_reverse_hair_dir + '/' + basename, Image.fromarray(np.uint8(reverse_hair_mask))
+)
 
 	print(counter)
 	counter+=1
