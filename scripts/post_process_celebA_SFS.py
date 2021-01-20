@@ -33,6 +33,11 @@ for imgname in images:
 	#if os.path.exists(out_name):
 	#	print('done')
 	#	continue
+
+	if counter < 1000:
+		counter += 1
+		print('finished previously, skipping')
+		continue
 	
 
 	input_img = imageio.imread(imgname)
