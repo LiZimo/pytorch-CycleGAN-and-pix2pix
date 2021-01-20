@@ -6,8 +6,9 @@ import ntpath
 import numpy as np
 from PIL import Image
 
-input_dir = '/mount/Users/yajie/zimo_Siggraph/CFD/CFD'
-output_dir = '/mount/Users/zli/stylegan2_data/raw_images/CFD_masked'
+#input_dir = '/mount/Users/yajie/zimo_Siggraph/CFD/CFD'
+input_dir = '/mount/Users/zli/stylegan2_data/raw_images/CFD_hair_masked'
+output_dir = '/mount/Users/zli/stylegan2_data/raw_images/CFD_final_output'
 #original_dir = '/mount/Users/zli/stylegan2_data/raw_images/capture_data/test'
 #original_dir = '/mount/Users/zli/stylegan2_data/raw_images/reduced_uv_maps/test'
 #output_dir = '/mount/Users/zli/pix2pix_data/completion_pix2pix_instance/test_latest/post_process'
