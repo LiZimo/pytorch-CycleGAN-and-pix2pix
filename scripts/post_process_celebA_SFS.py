@@ -30,9 +30,9 @@ for imgname in images:
 	basename = ntpath.basename(imgname)
 	out_name = os.path.join(output_dir, basename.replace('_output_uv.png', '_output_uv_nobackground.png'))
 
-	if os.path.exists(out_name):
-		print('done')
-		continue
+	#if os.path.exists(out_name):
+	#	print('done')
+	#	continue
 	
 
 	input_img = imageio.imread(imgname)
