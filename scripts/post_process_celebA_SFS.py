@@ -40,10 +40,10 @@ for imgname in images:
 	input_img = input_img[:,:,0:3]
 
 	hair_mask_name = hair_mask_dir + '/' + basename
-	if os.path.exists(hair_mask_name):
-		input_hair_mask = np.array(Image.open(hair_mask_name).convert('1')).astype(np.float32)
-	else:
-		input_hair_mask = np.zeros(template.shape)
+	# if os.path.exists(hair_mask_name):
+	input_hair_mask = np.array(Image.open(hair_mask_name).convert('1')).astype(np.float32)
+	# else:
+	# 	input_hair_mask = np.zeros(template.shape)
 	reverse_hair_mask = 1. - input_hair_mask
 	input_img[template == 0] = 0
 	input_img[reverse_hair_mask == 0] = 0
