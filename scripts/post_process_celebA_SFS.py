@@ -27,19 +27,29 @@ template = np.array(Image.open(template_name).convert('1')).astype(np.float32)
 images = glob.glob(input_dir + '/*output_uv.png')
 counter = 0
 for imgname in images:
+	out_name = os.path.join(output_dir, basename.replace('_output_uv.png', '_output_uv_nobackground.png'))
+
+	if os.path.exists(out_name):
+		print('done')
+		continue
 	basename = ntpath.basename(imgname)
 
 	input_img = imageio.imread(imgname)
 	input_img = cv2.resize(input_img, (512,512))
 	input_img = input_img[:,:,0:3]
-	input_hair_mask = np.array(Image.open(hair_mask_dir + '/' + basename).convert('1')).astype(np.float32)
+
+	hair_mask_name = hair_mask_dir + '/' + basename
+	if os.path.exists(hair_mask_name):
+		input_hair_mask = np.array(Image.open().convert('1')).astype(np.float32)
+	else:
+		input_hair_mask = np.ones(template.shape)
 	reverse_hair_mask = 1. - input_hair_mask
 	input_img[template == 0] = 0
 	input_img[reverse_hair_mask == 0] = 0
 
 
 
-	out_name = os.path.join(output_dir, basename.replace('_output_uv.png', '_output_uv_nobackground.png'))
+	
 	imageio.imwrite(out_name, input_img)
 	imageio.imwrite(output_reverse_hair_dir + '/' + basename, Image.fromarray(np.uint8(reverse_hair_mask*255.))
 )
