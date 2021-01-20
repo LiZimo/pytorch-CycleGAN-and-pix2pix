@@ -27,12 +27,13 @@ template = np.array(Image.open(template_name).convert('1')).astype(np.float32)
 images = glob.glob(input_dir + '/*output_uv.png')
 counter = 0
 for imgname in images:
+	basename = ntpath.basename(imgname)
 	out_name = os.path.join(output_dir, basename.replace('_output_uv.png', '_output_uv_nobackground.png'))
 
 	if os.path.exists(out_name):
 		print('done')
 		continue
-	basename = ntpath.basename(imgname)
+	
 
 	input_img = imageio.imread(imgname)
 	input_img = cv2.resize(input_img, (512,512))
