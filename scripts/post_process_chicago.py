@@ -7,8 +7,15 @@ import numpy as np
 from PIL import Image
 
 #input_dir = '/mount/Users/yajie/zimo_Siggraph/CFD/CFD'
-input_dir = '/mount/Users/zli/stylegan2_data/raw_images/CFD_hair_masked'
-output_dir = '/mount/Users/zli/stylegan2_data/raw_images/CFD_final_output'
+#input_dir = '/mount/Users/zli/stylegan2_data/raw_images/CFD_hair_masked'
+#output_dir = '/mount/Users/zli/stylegan2_data/raw_images/CFD_final_output'
+
+input_dir = '/mount/Users/yajie/zimo_Siggraph/TG_results'
+output_dir = '/mount/Users/zli/stylegan2_data/raw_images/TG_mono'
+
+if not os.path.exists(output_dir):
+	os.makedir(output_dir)
+
 #original_dir = '/mount/Users/zli/stylegan2_data/raw_images/capture_data/test'
 #original_dir = '/mount/Users/zli/stylegan2_data/raw_images/reduced_uv_maps/test'
 #output_dir = '/mount/Users/zli/pix2pix_data/completion_pix2pix_instance/test_latest/post_process'
@@ -29,8 +36,8 @@ for imgname in CFD_images:
 	basename = ntpath.basename(imgname)
 	im_id =basename.replace('_output_uv.png', '.jpg')
 	print(im_id)
-	if im_id not in valid_list:
-		continue
+	#if im_id not in valid_list:
+		#continue
 
 	input_img = imageio.imread(imgname)
 	input_img = cv2.resize(input_img, (512,512))
