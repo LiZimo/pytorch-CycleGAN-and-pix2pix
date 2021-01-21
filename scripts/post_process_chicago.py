@@ -14,7 +14,7 @@ input_dir = '/mount/Users/yajie/zimo_Siggraph/TG_results'
 output_dir = '/mount/Users/zli/stylegan2_data/raw_images/TG_mono'
 
 if not os.path.exists(output_dir):
-	os.makedir(output_dir)
+	os.mkdir(output_dir)
 
 #original_dir = '/mount/Users/zli/stylegan2_data/raw_images/capture_data/test'
 #original_dir = '/mount/Users/zli/stylegan2_data/raw_images/reduced_uv_maps/test'
